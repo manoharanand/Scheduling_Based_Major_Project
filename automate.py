@@ -35,6 +35,7 @@ output_dict = {
 
 
 def exec_auto_fit(req_no, func_no, worker_no):
+    #calling main() function of scheduling.py
     autofit_out = auto_fit(req_no, func_no, worker_no)
 
     printToExcel(
@@ -69,8 +70,8 @@ def addToExcel():
 
 def main():
     tot = 0
-    ls = [25]
-    for req_no in ls:
+    requests = [25,50,100]
+    for req_no in requests:
         tot += 1
         print(f"\n\treq_no: {req_no}\n")
 
@@ -82,32 +83,10 @@ def main():
                 exec_auto_fit(req_no, fn, wk)  # Runs Autofit algorithm
                 printToExcel()
 
-        # while cnt < iteration:
-        #     # vne_list = vne(no_requests=req_no)
-        #     # if os.stat('vnr250.pickle').st_size == 0:
-        #     #     print('File is empty')
-        #     #     pickle.dump(vne_list, open('vnr250.pickle', 'wb'))
-        #     # G = pickle.load(open('vnr250.pickle', 'rb'))
-        #     # config.substrate = copy.deepcopy(substrate)
-        #     # config.vne_list = copy.deepcopy(G)
-        #     # config.vne_list = copy.deepcopy(vne_list)
-        #
-        #     # Uncomment those functions which to run, comment all other. for ex if want to run greedy algorithm only leave
-        #
+
         #     exec_auto_fit(req_no, func_no, worker_no)  # Runs Autofit algorithm
         #     printToExcel()
 
-
-#######################################################################################
-#######################################################################################
-##                                                                                   ##
-##    IMPORTANT - CLOSE Results.xlsx (excel file) IF OPEN BEFORE RUNNING THIS           ##
-##                                                                                   ##
-##    IMPORTANT - PLEASE CHOOSE THE PICKLE FILE, CRB & BW LIMITS FOR                 ##
-##                UNIFORM DISTRIBUTIONS BEFORE RUNNING THIS   ##
-##                                                                                   ##
-#######################################################################################
-#######################################################################################
 
 
 if __name__ == "__main__":

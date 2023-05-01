@@ -69,8 +69,8 @@ def main(req_no, func_no, worker_no):
     assigned_function = 0
     i = 0
 
-    #for key, value in sorted_req_func:
-    while i < len(sorted_req_func):
+    for key, value in sorted_req_func:
+    # while i < len(sorted_req_func):
         key, value = sorted_req_func[i]
         _instruction_count = fn_details[key[1]]
 
@@ -96,12 +96,12 @@ def main(req_no, func_no, worker_no):
         # print(eligible_workers)
 
         if len(eligible_workers) == 0:
-            sorted_req_func.append((key, value))
-            i += 1
-            print([i,len(sorted_req_func)])
+            # sorted_req_func.append((key, value))
+            # i += 1
+            # print([i,len(sorted_req_func)])
             continue
-        i += 1
-        print([i, len(sorted_req_func)])
+        # i += 1
+        # print([i, len(sorted_req_func)])
         mapping_RF_to_worker[key] = eligible_workers[0][0]
         worker_details[eligible_workers[0][0]] -= _instruction_count
         assigned_function += 1
