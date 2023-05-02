@@ -1,0 +1,10 @@
+from datetime import datetime
+import time
+
+# current datetime
+now = datetime.now()
+current_time = now.time()
+time.sleep(3)
+end_time = now.time()
+print('Time', end_time - current_time)
+# print(type(current_time))
