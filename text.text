@@ -1,0 +1,5 @@
+03/05/2023
+1.worker and function's request is created.
+2. to modify the function registry in a way as it is required {"function_id": , "package_imports":{pid1, pid23, pid3}
+3. apply the deadline logic carefully as it should be
+4. calculate the resource utilization in PaSch and LeastLoaded then compare with fcfs deadline scheduler

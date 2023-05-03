@@ -1,4 +1,5 @@
 import copy
+import json
 
 # def schedule_function_requests(worker_list, package_list, function_registry, function_requests):
 #     scheduled_requests = []
@@ -49,8 +50,23 @@ import copy
 #
 #     return scheduled_requests
 
+workers = open('workers.json')
+# fn = json.load(func_file)
+worker_list = json.load(workers)
+packages = open('packages.json')
+package_list = json.load(packages)
+# function_reg = open('function_registry/functions.json')
+# function_registry = json.load(function_reg)
+function_req = open('function_requests/request100.json')
+function_requests = json.load(function_req)
+#temporary function registry
 
-import copy
+function_registry = {
+    "function_id_1": {"package_imports": ["package_id_1", "package_id_2"]},
+    "function_id_2": {"package_imports": ["package_id_2", "package_id_3"]},
+    # Add more function registries as needed
+}
+
 
 def schedule_function_requests(worker_list, package_list, function_registry, function_requests):
     scheduled_requests = []
@@ -62,7 +78,8 @@ def schedule_function_requests(worker_list, package_list, function_registry, fun
 
         # Fetch the required packages from the package list based on the function ID
         function_info = function_registry.get(function_id)
-        package_ids = function_info["package_imports"]
+        #change here to fetch the package size from the
+        # package_ids = function_info["package_imports"]
         required_packages = [package_list.get(package_id) for package_id in package_ids]
 
         # Check the availability of worker resources
@@ -102,6 +119,10 @@ def schedule_function_requests(worker_list, package_list, function_registry, fun
 
         # Update the current time
         current_time = finish_time
+        # Remove finished requests from the worker
+        # for worker in worker_list:
+        #     worker["scheduled_requests"] = [req for req in worker.get("scheduled_requests", [])
+        #                                     if req["finish_time"] > current_time]
 
     return scheduled_requests
 
@@ -129,36 +150,36 @@ def print_assigned_requests(scheduled_requests, current_time):
 
 #memory in megabytes, available_cpu is in Mips, here 100 instruction per second
 # Example usage
-worker_list = [
-    {"worker_id": 1, "available_cpu": 100, "available_memory": 1000},
-    {"worker_id": 2, "available_cpu": 100, "available_memory": 1000},
-    {"worker_id": 3, "available_cpu": 100, "available_memory": 1000},
-    {"worker_id": 4, "available_cpu": 100, "available_memory": 1000},
-    {"worker_id": 5, "available_cpu": 100, "available_memory": 1000}
-]
-
-package_list = {
-    "package_id_1": {"package_size_in_MB": 200},
-    "package_id_2": {"package_size_in_MB": 150},
-    "package_id_3": {"package_size_in_MB": 300},
-    # Add more packages as needed
-}
-
-function_registry = {
-    "function_id_1": {"package_imports": ["package_id_1", "package_id_2"]},
-    "function_id_2": {"package_imports": ["package_id_2", "package_id_3"]},
-    # Add more function registries as needed
-}
-
-function_requests = [
-    {"function_id": "function_id_1", "cpu_requirement": 20, "arrival_time": 0, "deadline": 10},
-    {"function_id": "function_id_2", "cpu_requirement": 30, "arrival_time": 4, "deadline": 10},
-    {"function_id": "function_id_1", "cpu_requirement": 10, "arrival_time": 2, "deadline": 10},
-    {"function_id": "function_id_2", "cpu_requirement": 40, "arrival_time": 5, "deadline": 10},
-    {"function_id": "function_id_1", "cpu_requirement": 12, "arrival_time": 0, "deadline": 10},
-    {"function_id": "function_id_1", "cpu_requirement": 30, "arrival_time": 0, "deadline": 10},
-    {"function_id": "function_id_2", "cpu_requirement": 10, "arrival_time": 0, "deadline": 10},
-    {"function_id": "function_id_2", "cpu_requirement": 20, "arrival_time": 0, "deadline": 10}]
+# worker_list = [
+#     {"worker_id": 1, "available_cpu": 100, "available_memory": 1000},
+#     {"worker_id": 2, "available_cpu": 100, "available_memory": 1000},
+#     {"worker_id": 3, "available_cpu": 100, "available_memory": 1000},
+#     {"worker_id": 4, "available_cpu": 100, "available_memory": 1000},
+#     {"worker_id": 5, "available_cpu": 100, "available_memory": 1000}
+# ]
+#
+# package_list = {
+#     "package_id_1": {"package_size_in_MB": 200},
+#     "package_id_2": {"package_size_in_MB": 150},
+#     "package_id_3": {"package_size_in_MB": 300},
+#     # Add more packages as needed
+# }
+#
+# function_registry = {
+#     "function_id_1": {"package_imports": ["package_id_1", "package_id_2"]},
+#     "function_id_2": {"package_imports": ["package_id_2", "package_id_3"]},
+#     # Add more function registries as needed
+# }
+#
+# function_requests = [
+#     {"function_id": "function_id_1", "cpu_requirement": 20, "arrival_time": 0, "deadline": 10},
+#     {"function_id": "function_id_2", "cpu_requirement": 30, "arrival_time": 4, "deadline": 10},
+#     {"function_id": "function_id_1", "cpu_requirement": 10, "arrival_time": 2, "deadline": 10},
+#     {"function_id": "function_id_2", "cpu_requirement": 40, "arrival_time": 5, "deadline": 10},
+#     {"function_id": "function_id_1", "cpu_requirement": 12, "arrival_time": 0, "deadline": 10},
+#     {"function_id": "function_id_1", "cpu_requirement": 30, "arrival_time": 0, "deadline": 10},
+#     {"function_id": "function_id_2", "cpu_requirement": 10, "arrival_time": 0, "deadline": 10},
+#     {"function_id": "function_id_2", "cpu_requirement": 20, "arrival_time": 0, "deadline": 10}]
 
 
 scheduled_requests = schedule_function_requests(worker_list, package_list, function_registry, function_requests)

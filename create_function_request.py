@@ -23,20 +23,7 @@ for total_request in requests:
         cpu_required = random.randint(10,25)
         arrival_time = random.randint(1, timestamplim)
         deadline = arrival_time + random.randint(10, 25)
-        functions_list.append({"fid": fid, "cpu_required": cpu_required, "arrival_time": arrival_time, "deadline": deadline})
-
+        functions_list.append({"function_id": fid, "cpu_required": cpu_required, "arrival_time": arrival_time, "deadline": deadline})
+    functions_list.sort(key=lambda x: x["arrival_time"])
     with open(f"/home/pgcse/PycharmProjects/Scheduling_Based_Major_Project/function_requests/request{total_request}.json", "w") as outfile:json.dump(functions_list, outfile)
 
-#
-# functions_list.sort(key=lambda x: x["timestamp"])
-# dict = {}
-# dict["workers"] = workers_list
-# dict["functions"] = functions_list
-# with open("/home/pgcse/Downloads/CHR/fs_major_least_loaded/requests/request1.json", "w") as outfile:
-#     json.dump(dict, outfile)
-#
-# # with open("C:/Users/student/Desktop/CHR/CHR/least_loaded/test/2.json", "w") as outfile:
-# #     json.dump(dict, outfile)
-# #
-# # with open("C:/Users/student/Desktop/CHR/CHR/improvedPaSch/test/2.json", "w") as outfile:
-# #     json.dump(dict, outfile)
