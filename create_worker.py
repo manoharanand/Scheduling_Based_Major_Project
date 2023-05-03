@@ -19,6 +19,6 @@ for i in range(0, workers):
 #     json.dump(dict, outfile)
 
 
-with open("/home/pgcse/PycharmProjects/Scheduling_Based_Major_Project/workers.json", "w") as outfile:
+with open("C:/Users/1997m/OneDrive/Desktop/Scheduling_Based_Major_Project/function_requests/workers.json", "w") as outfile:
     json.dump(workers_list, outfile)
 

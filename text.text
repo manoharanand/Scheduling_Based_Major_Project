@@ -3,3 +3,10 @@
 2. to modify the function registry in a way as it is required {"function_id": , "package_imports":{pid1, pid23, pid3}
 3. apply the deadline logic carefully as it should be
 4. calculate the resource utilization in PaSch and LeastLoaded then compare with fcfs deadline scheduler
+
+
+function_registry = {
+    "function_id_1": {"package_imports": ["package_id_1", "package_id_2"]},
+    "function_id_2": {"package_imports": ["package_id_2", "package_id_3"]},
+    # Add more function registries as needed
+}
