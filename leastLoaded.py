@@ -3,6 +3,7 @@ import json
 from Global import *
 from collections import defaultdict
 from create_function_request import *
+import operator
 
 #import testcases
 workers = open('workers.json')
@@ -21,7 +22,7 @@ for x in requests:
     function_req = open(f'function_requests/request{x}.json')
     function_requests = json.load(function_req)
 
-    def schedule_function_requests(worker_list, package_list, function_registry, function_requests):
+    def schedule_function_requests_ll(worker_list, package_list, function_registry, function_requests):
         scheduled_requests = []
         current_time = 0
 
@@ -48,6 +49,8 @@ for x in requests:
                 print("fid found and it's a warm start", function_id)
                 continue
             #cold start
+            worker_list = sorted(worker_list, key=operator.itemgetter('available_cpu', 'available_memory'))
+            #print("Worker list",worker_list)
             for worker in worker_list:
                 if worker["available_cpu"] >= request["cpu_required"] and worker["available_memory"] >= sum(package["package_size_in_MB"] for package in required_packages):
                     finish_time = max(current_time, request["arrival_time"]) + (request["deadline"] - current_time)
@@ -89,6 +92,7 @@ for x in requests:
             #     worker["scheduled_requests"] = [req for req in worker.get("scheduled_requests", [])
             #                                     if req["finish_time"] > current_time]
             #resource deallocation from worker's for every request
+
             for worker in worker_list:
                 completed_requests = [req for req in scheduled_requests if req["finish_time"] < start_time and
                                       req["worker_id"] == worker["worker_id"]]
@@ -125,7 +129,7 @@ for x in requests:
                 print(f"Function ID: {request['function_id']}, Worker ID: {request['worker_id']}")
 
 
-    scheduled_requests = schedule_function_requests(worker_list, package_list, function_registry, function_requests)
+    scheduled_requests = schedule_function_requests_ll(worker_list, package_list, function_registry, function_requests)
     # # current_time = 8  # Specify the desired time
     print_worker_status(worker_list)
     # current_time = 10  # Specify the desired time
@@ -138,3 +142,5 @@ for x in requests:
     print(f"CPU Utilization: {cpu_utilization}%, Memory Utilization: {memory_utilization}%")
 
 print(resource_utilization)
+with open("C:/Users/1997m/OneDrive/Desktop/Scheduling_Based_Major_Project/function_registry/result.json", "a") as outfile:
+    json.dump(resource_utilization, outfile)
