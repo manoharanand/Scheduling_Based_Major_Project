@@ -83,8 +83,8 @@ plt.xlabel('Number of Requests', fontweight ='bold', fontsize = 15)
 plt.ylabel('Cpu Utilization(%)', fontweight ='bold', fontsize = 15)
 plt.xticks([r + barWidth for r in range(len(sequential))],
            [100, 200, 300, 400, 500, 600, 700, 800, 900])
-
-plt.savefig('C:/Users/1997m/OneDrive/Desktop/Scheduling_Based_Major_Project/cpu_utilization.png')
 plt.legend()
+plt.savefig('C:/Users/1997m/OneDrive/Desktop/Scheduling_Based_Major_Project/cpu_utilization.png')
+
 plt.show()
 
