@@ -22,7 +22,7 @@ for x in requests:
     function_req = open(f'function_requests/request{x}.json')
     function_requests = json.load(function_req)
 
-    def schedule_function_requests_ll(worker_list, package_list, function_registry, function_requests):
+    def schedule_function_requests_wr(worker_list, package_list, function_registry, function_requests):
         scheduled_requests = []
         current_time = 0
 
@@ -49,7 +49,7 @@ for x in requests:
                 print("fid found and it's a warm start", function_id)
                 continue
             #cold start
-            worker_list = sorted(worker_list, key=operator.itemgetter('available_cpu', 'available_memory'))
+            worker_list = sorted(worker_list, key=operator.itemgetter('available_cpu', 'available_memory'),reverse=True)
             #print("Worker list",worker_list)
             for worker in worker_list:
                 if worker["available_cpu"] >= request["cpu_required"] and worker["available_memory"] >= sum(package["package_size_in_MB"] for package in required_packages):
@@ -129,7 +129,7 @@ for x in requests:
                 print(f"Function ID: {request['function_id']}, Worker ID: {request['worker_id']}")
 
 
-    scheduled_requests = schedule_function_requests_ll(worker_list, package_list, function_registry, function_requests)
+    scheduled_requests = schedule_function_requests_wr(worker_list, package_list, function_registry, function_requests)
     # # current_time = 8  # Specify the desired time
     print_worker_status(worker_list)
     # current_time = 10  # Specify the desired time

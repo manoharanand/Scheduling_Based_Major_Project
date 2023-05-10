@@ -1,7 +1,7 @@
 
 from main import *
+from bestFit import *
 from leastLoaded import *
-from worseFit import *
 result = []
 
 for i in range(10):
