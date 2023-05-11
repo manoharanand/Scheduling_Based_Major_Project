@@ -24,7 +24,7 @@ for total_request in requests:
         deadline = arrival_time + random.randint(10, 25)
         functions_list.append({"function_id": fid, "cpu_required": cpu_required, "arrival_time": arrival_time, "deadline": deadline})
     functions_list.sort(key=lambda x: x["arrival_time"])
-    with open(f"C:/Users/1997m/OneDrive/Desktop/Scheduling_Based_Major_Project/function_requests/request{total_request}.json", "w") as outfile:
+    with open(f"/home/pgcse/PycharmProjects/Scheduling_Based_Major_Project/function_requests/request{total_request}.json", "w") as outfile:
         json.dump(functions_list, outfile)
     initial = m
     timestamplim += m

@@ -37,7 +37,7 @@ dict_funcs = {}
 dict_funcs = functions_list
 
 
-with open("C:/Users/1997m/OneDrive/Desktop/Scheduling_Based_Major_Project/function_registry/registry_of_functions.json", "w") as outfile:
+with open("/home/pgcse/PycharmProjects/Scheduling_Based_Major_Project/function_registry/registry_of_functions.json", "w") as outfile:
     json.dump(dict_funcs, outfile)
 
 
